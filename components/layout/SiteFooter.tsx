@@ -39,7 +39,7 @@ export async function SiteFooter() {
   return (
     <footer className="overflow-hidden bg-fg pt-16 pb-6 text-bg">
       <div className="container-page">
-        <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr_1fr_1.6fr]">
+        <div className="grid gap-12 grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr_1fr_1.6fr]">
           <div className="flex flex-col gap-4">
             <Logo href={to("")} />
             <p className="max-w-[14rem] text-sm opacity-70">{t.footer.tagline}</p>

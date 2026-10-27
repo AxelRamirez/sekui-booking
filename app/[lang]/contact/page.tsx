@@ -23,7 +23,7 @@ export default async function ContactPage() {
   return (
     <>
       <PageHeader title={c.title} subtitle={c.subtitle} />
-      <section className="container-page grid gap-10 pb-24 lg:grid-cols-[1fr_1.3fr]">
+      <section className="container-page grid gap-10 pb-24 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
         <div className="flex flex-col gap-8">
           <dl className="grid gap-6">
             {details.map((item) => (

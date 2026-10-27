@@ -54,6 +54,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fieldsets default to min-width: min-content, which can force horizontal overflow. */
+fieldset {
+  min-width: 0;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);

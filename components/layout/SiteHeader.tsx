@@ -43,6 +43,7 @@ export async function SiteHeader() {
             links={mobileLinks}
             menuLabel={t.nav.menu}
             closeLabel={t.nav.close}
+            brand={<Logo href={to("")} />}
             footer={<LanguageSwitcher current={locale} label={t.nav.language} className="text-base" />}
           />
         </div>

@@ -64,8 +64,8 @@ export default async function TourPage({ params, searchParams }: PageProps<"/[la
         ))}
       </section>
 
-      <div className="container-page grid gap-14 py-14 lg:grid-cols-[1fr_25rem]">
-        <div className="flex flex-col gap-14">
+      <div className="container-page grid grid-cols-1 gap-14 py-14 lg:grid-cols-[minmax(0,1fr)_25rem]">
+        <div className="flex min-w-0 flex-col gap-14">
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line text-sm sm:grid-cols-4">
             {facts.map((fact) => (
               <div key={fact.label} className="bg-surface p-4">
@@ -112,7 +112,7 @@ export default async function TourPage({ params, searchParams }: PageProps<"/[la
             </ol>
           </section>
 
-          <section className="grid gap-8 sm:grid-cols-[1.6fr_1fr]">
+          <section className="grid grid-cols-1 gap-8 sm:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
             <div>
               <h2 className="heading mb-4 text-2xl">{t.included.title}</h2>
               <ul className="grid gap-3">
@@ -160,7 +160,7 @@ export default async function TourPage({ params, searchParams }: PageProps<"/[la
           </section>
         </div>
 
-        <aside id="departures" className="scroll-mt-24 lg:sticky lg:top-24 lg:self-start">
+        <aside id="departures" className="min-w-0 scroll-mt-24 lg:sticky lg:top-24 lg:self-start">
           <Suspense fallback={<div className="card h-[32rem] animate-pulse" />}>
             <TourDepartures tour={tour} searchParams={searchParams} locale={locale} t={t} />
           </Suspense>

@@ -116,7 +116,7 @@ async function Confirmation({
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="card p-6">
           <TripSummary booking={booking} departure={departure} locale={locale} t={t} />
         </div>

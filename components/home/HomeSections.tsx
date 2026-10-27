@@ -61,7 +61,7 @@ export function HomeSections({ locale, t }: { locale: Locale; t: Dictionary }) {
       </section>
 
       {/* Discover collage */}
-      <section className="container-page grid items-center gap-12 pb-24 lg:grid-cols-[1fr_1.4fr]">
+      <section className="container-page grid items-center gap-12 pb-24 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         <h2 className="heading text-6xl leading-[0.95] sm:text-7xl lg:text-8xl">
           {h.discover.title.split(/(?<=\.)\s+/).map((word) => (
             <span key={word} className="block">
@@ -69,18 +69,18 @@ export function HomeSections({ locale, t }: { locale: Locale; t: Dictionary }) {
             </span>
           ))}
         </h2>
-        <div className="grid grid-cols-[1.2fr_1fr] gap-4">
-          <div className="relative row-span-2 aspect-[3/4] overflow-hidden rounded-card">
+        <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-4">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-card sm:row-span-2">
             <Photo name="turquoiseIsland" alt="" sizes="(min-width: 1024px) 35vw, 60vw" />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {(["rockyCove", "milkyWay"] as const).map((image) => (
               <div key={image} className="relative aspect-square overflow-hidden rounded-2xl">
                 <Photo name={image} alt="" sizes="15vw" />
               </div>
             ))}
           </div>
-          <div className="flex flex-col justify-end gap-4">
+          <div className="col-span-2 flex flex-col justify-end gap-4 sm:col-span-1">
             <p className="text-sm leading-relaxed text-muted">{h.discover.body}</p>
             <Link href={to(routes.tours)} className="btn btn-outline btn-sm w-fit border-line">
               {h.discover.cta} ↗
@@ -113,10 +113,10 @@ export function HomeSections({ locale, t }: { locale: Locale; t: Dictionary }) {
             </Link>
           </div>
           <div className="text-center">
-            <ul className="mb-8 flex flex-wrap justify-center gap-5">
+            <ul className="mb-8 flex flex-wrap justify-center gap-3 sm:gap-5">
               {moods.map((mood) => (
                 <li key={mood.key} className="flex flex-col items-center gap-2">
-                  <span className="relative block size-16 overflow-hidden rounded-full ring-1 ring-line sm:size-20">
+                  <span className="relative block size-14 overflow-hidden rounded-full ring-1 ring-line sm:size-20">
                     <Photo name={mood.image} alt="" sizes="80px" />
                   </span>
                   <span className="text-xs text-muted">{h.moods.items[mood.key]}</span>
@@ -195,7 +195,7 @@ export function HomeSections({ locale, t }: { locale: Locale; t: Dictionary }) {
               className="group relative block aspect-[4/5] overflow-hidden rounded-card sm:aspect-[16/11]"
             >
               <Photo name={location.image} alt={location.name} sizes="(min-width: 768px) 50vw, 100vw" className="transition duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/5" />
               <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
                 <p className="text-xs tracking-[0.2em] uppercase opacity-80">{location.region[locale]}</p>
                 <p className="heading text-4xl sm:text-5xl">{location.name}</p>
@@ -226,7 +226,7 @@ export function HomeSections({ locale, t }: { locale: Locale; t: Dictionary }) {
           {h.reviews.titleEnd}
         </h2>
 
-        <div className="mt-16 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr_1.4fr]">
+        <div className="mt-16 grid items-center gap-8 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1.4fr)]">
           <div className="flex flex-col gap-3">
             {otherReviews.map((review) => (
               <div key={review.name} className="flex items-center gap-3 rounded-2xl bg-surface p-4 ring-1 ring-line">

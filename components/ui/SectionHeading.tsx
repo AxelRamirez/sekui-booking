@@ -23,7 +23,7 @@ export function SectionHeading({
         {body && <p className={`mt-5 max-w-xl text-[15px] leading-relaxed text-muted ${centered ? "mx-auto" : ""}`}>{body}</p>}
       </div>
       {action && (
-        <Link href={action.href} className="btn btn-outline btn-sm shrink-0 border-line">
+        <Link href={action.href} className={`btn btn-outline btn-sm shrink-0 border-line ${centered ? "" : "self-start md:self-auto"}`}>
           {action.label} ↗
         </Link>
       )}

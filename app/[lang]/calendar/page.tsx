@@ -58,7 +58,7 @@ async function MonthCalendar({
 
   return (
     <div className="flex flex-col gap-8">
-      <nav aria-label={t.search.month} className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2">
+      <nav aria-label={t.search.month} className="-mx-1 flex min-w-0 gap-2 overflow-x-auto px-1 pb-2">
         {months.map((key) => {
           const count = counts[key] ?? 0;
           const active = key === month;
@@ -72,18 +72,18 @@ async function MonthCalendar({
                 active ? "border-accent bg-accent text-accent-fg" : "border-line hover:border-fg"
               } ${count === 0 && !active ? "opacity-40" : ""}`}
             >
-              <span className="font-semibold capitalize">{formatMonth(key, locale).replace(/ de /, " ")}</span>
+              <span className="font-semibold first-letter:uppercase">{formatMonth(key, locale).replace(/ de /, " ")}</span>
               <span className="text-xs opacity-80">{plural(t.calendar.count, count, locale)}</span>
             </Link>
           );
         })}
       </nav>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="-mx-1 flex min-w-0 gap-2 overflow-x-auto px-1 pb-2 md:flex-wrap md:overflow-visible">
         <Link
           href={link({ tour: null })}
           scroll={false}
-          className={`rounded-control border px-3 py-1.5 text-sm ${!search.tour ? "border-fg bg-fg text-bg" : "border-line"}`}
+          className={`shrink-0 rounded-control border px-3 py-1.5 text-sm whitespace-nowrap ${!search.tour ? "border-fg bg-fg text-bg" : "border-line"}`}
         >
           {t.calendar.allTours}
         </Link>
@@ -92,7 +92,7 @@ async function MonthCalendar({
             key={tour.slug}
             href={link({ tour: tour.slug })}
             scroll={false}
-            className={`rounded-control border px-3 py-1.5 text-sm ${search.tour === tour.slug ? "border-fg bg-fg text-bg" : "border-line"}`}
+            className={`shrink-0 rounded-control border px-3 py-1.5 text-sm whitespace-nowrap ${search.tour === tour.slug ? "border-fg bg-fg text-bg" : "border-line"}`}
           >
             {tour.name[locale]}
           </Link>

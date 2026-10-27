@@ -43,12 +43,12 @@ export function TripSummary({
       <dl className="grid gap-4 sm:grid-cols-2">
         <div>
           <dt className="label">{t.booking.departure}</dt>
-          <dd className="font-semibold capitalize">{longDate(departure.startDate)}</dd>
+          <dd className="font-semibold first-letter:uppercase">{longDate(departure.startDate)}</dd>
           <dd className="text-sm text-muted">{site.airport[locale]}</dd>
         </div>
         <div>
           <dt className="label">{t.booking.return}</dt>
-          <dd className="font-semibold capitalize">{longDate(departure.endDate)}</dd>
+          <dd className="font-semibold first-letter:uppercase">{longDate(departure.endDate)}</dd>
         </div>
         <div>
           <dt className="label">{t.myTrip.travelers}</dt>

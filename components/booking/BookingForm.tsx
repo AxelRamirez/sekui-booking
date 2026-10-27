@@ -119,7 +119,7 @@ export function BookingForm({
   const longDate = (date: string) => formatDate(date, locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid scroll-mt-28 gap-10 lg:grid-cols-[1fr_24rem]">
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid scroll-mt-28 grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_24rem]">
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="departureId" value={departure.id} />
 
@@ -161,11 +161,11 @@ export function BookingForm({
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="card p-4">
               <p className="label">{b.departure}</p>
-              <p className="text-lg font-semibold capitalize">{longDate(departure.startDate)}</p>
+              <p className="text-lg font-semibold first-letter:uppercase">{longDate(departure.startDate)}</p>
             </div>
             <div className="card p-4">
               <p className="label">{b.return}</p>
-              <p className="text-lg font-semibold capitalize">{longDate(departure.endDate)}</p>
+              <p className="text-lg font-semibold first-letter:uppercase">{longDate(departure.endDate)}</p>
             </div>
           </div>
 

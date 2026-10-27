@@ -33,41 +33,42 @@ export function DepartureList({
         const open = isOpen(item);
         const href = localePath(locale, routes.tour(tour.slug)) + tripQuery({ departure: departure.id, guests });
         return (
+          // Mobile: date + details on top, availability + action below. Desktop: one row.
           <li
             key={departure.id}
-            className={`card flex flex-wrap items-center gap-4 p-3 sm:flex-nowrap sm:gap-6 sm:p-4 ${open ? "" : "opacity-60"}`}
+            className={`card grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 p-4 md:flex md:gap-6 ${open ? "" : "opacity-60"}`}
           >
-            <div className="relative hidden size-20 shrink-0 overflow-hidden rounded-xl sm:block">
+            <div className="relative hidden size-20 shrink-0 overflow-hidden rounded-xl md:block">
               <Photo name={tour.image} alt="" sizes="80px" />
             </div>
             <div className="flex w-14 shrink-0 flex-col items-center text-center">
               <span className="text-[11px] text-muted uppercase">{formatDate(departure.startDate, locale, { weekday: "short" })}</span>
-              <span className="heading text-3xl leading-none">
-                {formatDate(departure.startDate, locale, { day: "numeric" })}
-              </span>
+              <span className="heading text-3xl leading-none">{formatDate(departure.startDate, locale, { day: "numeric" })}</span>
               <span className="text-xs text-muted uppercase">{formatDate(departure.startDate, locale, { month: "short" })}</span>
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="heading truncate text-xl">{tour.name[locale]}</p>
-              <p className="text-sm text-muted">
+            <div className="min-w-0 md:flex-1">
+              <p className="heading line-clamp-2 text-xl leading-tight">{tour.name[locale]}</p>
+              <p className="mt-1 text-sm text-muted">
                 {formatDateRange(departure.startDate, departure.endDate, locale)} ·{" "}
                 {fill(t.common.daysNights, { days: tour.days, nights: tour.nights })}
-                {departure.isPeak && <span className="ml-2 text-highlight">· {t.common.peak}</span>}
+                {departure.isPeak && <span className="text-highlight"> · {t.common.peak}</span>}
               </p>
             </div>
-            <div className="flex flex-col items-start gap-1 sm:items-end">
-              <AvailabilityBadge status={status} label={t.common.availability[status]} />
-              {open && <span className="text-xs text-muted">{plural(t.common.spotsLeft, spotsLeft, locale)}</span>}
+            <div className="col-span-2 flex items-center justify-between gap-3 border-t border-line pt-3 md:ml-auto md:gap-6 md:border-0 md:pt-0">
+              <div className="flex flex-col items-start gap-1 md:items-end">
+                <AvailabilityBadge status={status} label={t.common.availability[status]} />
+                {open && <span className="text-xs text-muted">{plural(t.common.spotsLeft, spotsLeft, locale)}</span>}
+              </div>
+              {open ? (
+                <Link href={href} className="btn btn-primary btn-sm">
+                  {t.calendar.viewTour}
+                </Link>
+              ) : (
+                <span className="btn btn-outline btn-sm" aria-disabled="true">
+                  {t.common.availability[status]}
+                </span>
+              )}
             </div>
-            {open ? (
-              <Link href={href} className="btn btn-primary btn-sm ml-auto">
-                {t.calendar.viewTour}
-              </Link>
-            ) : (
-              <span className="btn btn-outline btn-sm ml-auto" aria-disabled="true">
-                {t.common.availability[status]}
-              </span>
-            )}
           </li>
         );
       })}

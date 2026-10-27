@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { AvailabilityStatus } from "@/lib/booking/types";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
-import { fill, formatDateRange, formatMoney, formatMonth, plural } from "@/lib/i18n/format";
+import { fill, formatDate, formatDateRange, formatMoney, plural } from "@/lib/i18n/format";
 
 export interface PickerDeparture {
   id: string;
@@ -62,7 +62,7 @@ export function DeparturePicker({
   const t = copy.tours;
 
   return (
-    <div className="card flex flex-col gap-5 p-5 sm:p-6">
+    <div className="card flex min-w-0 flex-col gap-5 p-5 sm:p-6">
       <div>
         <p>
           <span className="heading text-4xl">{money(price)}</span>
@@ -72,7 +72,7 @@ export function DeparturePicker({
 
       <div>
         <p className="label">{t.chooseMonth}</p>
-        <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2">
+        <div className="grid grid-cols-3 gap-2">
           {months.map((key) => {
             const count = openCount(key);
             const active = key === month;
@@ -86,11 +86,11 @@ export function DeparturePicker({
                   setSelectedId(null);
                 }}
                 aria-pressed={active}
-                className={`shrink-0 rounded-control border px-3 py-1.5 text-sm capitalize transition ${
+                className={`rounded-control border px-2 py-1.5 text-xs transition first-letter:uppercase ${
                   active ? "border-accent bg-accent text-accent-fg" : "border-line hover:border-fg"
                 } disabled:cursor-not-allowed disabled:opacity-35`}
               >
-                {formatMonth(key, locale).replace(/ de /, " ")}
+                {formatDate(`${key}-01`, locale, { month: "short", year: "numeric" }).replace(/ de /, " ").replace(".", "")}
               </button>
             );
           })}

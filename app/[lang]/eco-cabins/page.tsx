@@ -26,7 +26,7 @@ export default async function CabinsPage() {
         {locations.map((location) => (
           <a key={location.slug} href={`#${location.slug}`} className="group relative block aspect-[16/10] overflow-hidden rounded-card">
             <Photo name={location.image} alt={location.name} preload sizes="(min-width: 640px) 50vw, 100vw" className="transition duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/5" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
               <p className="text-xs tracking-[0.2em] uppercase opacity-80">{location.region[locale]}</p>
               <p className="heading text-4xl sm:text-5xl">{location.name}</p>
@@ -41,7 +41,7 @@ export default async function CabinsPage() {
         const hasTours = toursAt(location.slug).length > 0;
         return (
           <section key={location.slug} id={location.slug} className="container-page scroll-mt-24 pb-20">
-            <div className="mb-10 grid gap-8 border-t border-line pt-10 lg:grid-cols-[1fr_1.2fr]">
+            <div className="mb-10 grid gap-8 border-t border-line pt-10 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
               <div>
                 <p className="eyebrow mb-3">
                   {location.region[locale]} · {fill(c.cabins[cabins.length === 1 ? "one" : "other"], { count: cabins.length })}
@@ -86,7 +86,7 @@ export default async function CabinsPage() {
         );
       })}
 
-      <section className="container-page grid gap-10 pb-24 lg:grid-cols-[1fr_1.4fr]">
+      <section className="container-page grid gap-10 pb-24 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         <div className="prose-body text-lg">
           {c.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>

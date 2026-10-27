@@ -23,7 +23,7 @@ export function Photo({
       sizes={sizes}
       preload={preload}
       loading={preload ? "eager" : undefined}
-      className={`object-cover ${className}`}
+      className={`bg-sunken object-cover ${className}`}
     />
   );
 }

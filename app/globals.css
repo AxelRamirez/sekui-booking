@@ -1,26 +1,203 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Design tokens. Components only reference these (via the Tailwind theme
+ * below), so the palette and type can be changed in one place.
+ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-highlight: var(--highlight);
+  --color-line: var(--line);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-display: var(--display-family);
+  --font-sans: var(--body-family);
+  --radius-card: var(--card-radius);
+  --radius-control: var(--control-radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --bg: #f7f3ec;
+  --surface: #ffffff;
+  --sunken: #efe7da;
+  --fg: #1f2a2e;
+  --muted: #5d6c6f;
+  --accent: #0f6e6e;
+  --accent-fg: #ffffff;
+  --highlight: #e07a5f;
+  --line: #e2d8c7;
+  --success: #2f7d4f;
+  --warning: #c26a12;
+  --danger: #b4372f;
+  --display-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --body-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --card-radius: 1.25rem;
+  --control-radius: 999px;
+  --heading-transform: none;
+  --heading-tracking: -0.025em;
+  --heading-weight: 600;
+  --heading-style: normal;
+  --button-transform: none;
+  --button-tracking: 0;
+  --eyebrow-color: var(--highlight);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-family);
+  -webkit-font-smoothing: antialiased;
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility heading {
+  font-family: var(--display-family);
+  font-weight: var(--heading-weight);
+  text-transform: var(--heading-transform);
+  letter-spacing: var(--heading-tracking);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--eyebrow-color);
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--control-radius);
+    padding: 0.75rem 1.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: var(--button-transform);
+    letter-spacing: var(--button-tracking);
+    transition:
+      background-color 150ms,
+      color 150ms,
+      border-color 150ms,
+      opacity 150ms;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--accent), black 12%);
+  }
+  .btn-outline {
+    border: 1px solid currentColor;
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: color-mix(in oklab, currentColor, transparent 90%);
+  }
+  .btn-ghost:hover {
+    background: color-mix(in oklab, var(--fg), transparent 92%);
+  }
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .field {
+    width: 100%;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--fg);
+    border-radius: min(var(--control-radius), 0.75rem);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+  }
+  .field:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--card-radius);
+  }
+
+  .prose-body p {
+    margin-bottom: 1.1em;
+    line-height: 1.7;
+  }
+
+  /* Option tiles (radio/checkbox cards) */
+  .choice {
+    display: block;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: min(var(--card-radius), 1rem);
+    padding: 1rem;
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .choice:has(input:checked) {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .choice:has(input:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* Large uppercase statements and frosted panels over imagery */
+@utility statement {
+  font-family: var(--display-family);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--fg), transparent 55%);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgb(255 255 255 / 0.18);
 }
